@@ -1,0 +1,78 @@
+.mainhead{
+    font-weight:bold;
+    font-size:130px;
+    background-color: #ffedf6;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-right: 100px;
+    margin-left: 100px;
+    text-align: center;
+    font-family:'Roboto';
+}
+
+.subhead{
+    font-weight: normal;
+    font-size:50px;
+    text-align: center;
+    border: none;
+    font-family:'Roboto';
+}
+
+.reporthead{
+    font-weight:normal;
+    font-size:20px;
+    text-underline: black;
+    font-family:'Roboto';
+    text-align: center;
+}
+
+.bluetext {
+    color: #192580;
+}
+
+
+.usermsg{
+    margin-top: 100px;
+    font-weight:normal;
+    font-size:20px;
+    text-align: center;
+    font-family:'Roboto';
+}
+
+
+.clothesimg{
+    width:200px;
+    height: 250px;
+}
+
+.petsimg{
+    width:300px;
+    height: 350px;
+}
+
+.otherimg{
+    width:300px;
+    height:300px;
+}
+
+
+img {
+    width:50px;
+}
+
+
+.active {
+    background-color: deepskyblue;
+}
+
+.body-content{
+    position:relative;
+    top:20px;
+    height:700px;
+    width:800px;
+    margin-left:auto;
+    margin-right:auto;
+    background: transparent;
+}
+
+
