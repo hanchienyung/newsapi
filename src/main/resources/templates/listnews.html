@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<th:block th:replace="fragment::top"></th:block>
+<head>
+    <meta charset="UTF-8"/>
+    <div th:replace="fragment :: top"></div>
+    <link rel="stylesheet" href="./css/styles.css"/>
+</head>
+<div th:replace="fragment :: navlinks"></div>
+<h1>List of News</h1>
+<table class="table" >
+    <tr>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Category Name</th>
+
+    </tr>
+    <tr th:each="article : ${articles}">
+        <td data-th="Author" th:text="${article.author}"></td>
+        <td data-th="Title" th:text="${article.title}"></td>
+        <td data-th="Description" th:text="${article.description}"></td>
+
+    </tr>
+</table>
+<section>
+    <span th:replace="fragment::bootstrap4js"></span>
+</section>
+</body>
+</html>

@@ -24,8 +24,6 @@ public class DataLoader implements CommandLineRunner {
     @Autowired
     CategoryRepository categoryRepository;
 
-    @Autowired
-    NewsRepository newsRepository;
 
 
     @Override
@@ -62,7 +60,7 @@ public class DataLoader implements CommandLineRunner {
 
 
         //Add User Profiles
-        UserProfile profile1 = new UserProfile("profile1", user1);
+      /*  UserProfile profile1 = new UserProfile("profile1", user1);
         userProfileRepository.save(profile1);
         user1.addProfile(profile1);
 
@@ -92,31 +90,31 @@ public class DataLoader implements CommandLineRunner {
         //Create news
         News news1 = new News();
         news1.setTitle("Trumps trade war");
-        news1.setStory("In his expanding war over ...");
+        news1.setDescription("In his expanding war over ...");
         news1.setCategoryName("worldnews");
         newsRepository.save(news1);
 
         News news2 = new News();
         news2.setTitle("The crisis next door");
-        news2.setStory("The mass exodus of desperate ...");
+        news2.setDescription("The mass exodus of desperate ...");
         news2.setCategoryName("business");
         newsRepository.save(news2);
 
         News news3 = new News();
         news3.setTitle("Lose now, win later");
-        news3.setStory("The NBA standings...");
+        news3.setDescription("The NBA standings...");
         news3.setCategoryName("sports");
         newsRepository.save(news3);
 
         News news4 = new News();
         news4.setTitle("UMBC Leader forms..");
-        news4.setStory("The coach had said...");
+        news4.setDescription("The coach had said...");
         news4.setCategoryName("classified");
         newsRepository.save(news4);
 
         News news5 = new News();
         news5.setTitle("Comedians will be coming early ..");
-        news5.setStory("Downtown performance..");
+        news5.setDescription("Downtown performance..");
         news5.setCategoryName("travel");
         newsRepository.save(news5);
 
@@ -160,7 +158,7 @@ public class DataLoader implements CommandLineRunner {
 
        profile5.addCategorytoProfile(category2);
        userProfileRepository.save(profile5);
-
+*/
 
     }
 

@@ -17,19 +17,19 @@ public class Category {
     @ManyToMany
     private Set<UserProfile> categoryProfiles;
 
-    @ManyToMany
-    private Set<News> categoryNews;
+    //@ManyToMany
+    //private Set<News> categoryNews;
 
     public Category() {
         this.categoryProfiles = new HashSet<>();
-        this.categoryNews = new HashSet<>();
+      //  this.categoryNews = new HashSet<>();
     }
 
     public Category(String categoryName)
     {
         this.categoryName = categoryName;
         this.categoryProfiles = new HashSet<>();
-        this.categoryNews = new HashSet<>();
+      //  this.categoryNews = new HashSet<>();
     }
 
 
@@ -57,11 +57,11 @@ public class Category {
         this.categoryProfiles = categoryProfiles;
     }
 
-    public Set<News> getCategoryNews() {
-        return categoryNews;
-    }
+   // public Set<News> getCategoryNews() {
+   //     return categoryNews;
+   // }
 
-    public void setCategoryNews(Set<News> categoryNews) {
-        this.categoryNews = categoryNews;
-    }
+   // public void setCategoryNews(Set<News> categoryNews) {
+   //     this.categoryNews = categoryNews;
+   // }
 }

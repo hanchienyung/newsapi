@@ -29,6 +29,8 @@ public class AppUser {
     private String email;
 
 
+
+
     //use Fetch Type Eager user all data will be avivalible for this object
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name="user_id"),
@@ -39,8 +41,8 @@ public class AppUser {
     private Set<AppRole> roles;
 
 
-    @OneToOne(mappedBy = "user")
-    private UserProfile userProfile;
+    //@OneToOne(mappedBy = "user")
+    //private UserProfile userProfile;
 
     public AppUser() {
         this.roles = new HashSet<>();
@@ -61,9 +63,9 @@ public class AppUser {
     public void addRole(AppRole role) { this.roles.add(role);}
 
 
-    public void addProfile(UserProfile userProfile) {
+    /*public void addProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
-    }
+    }*/
 
 
     public long getId() {
@@ -122,12 +124,12 @@ public class AppUser {
         this.roles = roles;
     }
 
-    public UserProfile getUserProfile() {
+    /*public UserProfile getUserProfile() {
         return userProfile;
     }
 
     public void setUserProfile(UserProfile userProfile) {
         this.userProfile = userProfile;
-    }
+    }*/
 }
 

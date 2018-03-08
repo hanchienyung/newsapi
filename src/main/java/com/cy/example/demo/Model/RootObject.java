@@ -1,16 +1,9 @@
 package com.cy.example.demo.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Set;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class News {
-
+public class RootObject
+{
     private String status;
     private int totalResults;
     private ArrayList<Article> articles;
@@ -26,6 +19,4 @@ public class News {
 
     public ArrayList<Article> getArticles() { return this.articles; }
     public void setArticles(ArrayList<Article> articles) { this.articles = articles; }
-
-
 }
