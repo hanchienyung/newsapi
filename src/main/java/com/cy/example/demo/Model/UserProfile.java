@@ -25,12 +25,13 @@ public class UserProfile {
 
         public UserProfile() {
            this.user = new AppUser();
+           this.profileCategories = new HashSet<>();
         }
 
         public UserProfile(String profileName, AppUser user) {
-        this.profileName = profileName;
-        this.user = user;
-
+           this.profileName = profileName;
+           this.user = user;
+           this.profileCategories = new HashSet<>();
        }
 
        public  void addCategorytoProfile(Category acategory) {

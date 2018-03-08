@@ -1,6 +1,7 @@
 package com.cy.example.demo.Model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -20,10 +21,15 @@ public class Category {
     private Set<News> categoryNews;
 
     public Category() {
+        this.categoryProfiles = new HashSet<>();
+        this.categoryNews = new HashSet<>();
     }
 
-    public Category(String categoryName) {
+    public Category(String categoryName)
+    {
         this.categoryName = categoryName;
+        this.categoryProfiles = new HashSet<>();
+        this.categoryNews = new HashSet<>();
     }
 
 
