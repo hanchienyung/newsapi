@@ -9,18 +9,17 @@
     <link rel="stylesheet" href="./css/styles.css"/>
 </head>
 <div th:replace="fragment :: navlinks"></div>
-<h1>List of Profiles</h1>
+<h1>Profile</h1>
 <table class="table" >
     <tr>
-        <th>Username</th>
         <th>Topic</th>
         <th>Category</th>
 
     </tr>
     <tr th:each="profile : ${profiles}">
-        <td data-th="Username" th:text="${profile.author}"></td>
-        <td data-th="Topic" th:text="${profile.title}"></td>
-        <td data-th="Category" th:text="${article.description}"></td>
+        <!--<td data-th="Username" th:text="${profile.getAppusers().}"></td> -->
+        <td data-th="Topic" th:text="${profile.getTopic()}"></td>
+        <td data-th="Category" th:text="${profile.getCategory()}"></td>
 
     </tr>
 </table>

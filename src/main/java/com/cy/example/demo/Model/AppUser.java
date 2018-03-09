@@ -46,7 +46,7 @@ public class AppUser {
 
     public AppUser() {
         this.roles = new HashSet<>();
-      //  this.userProfile = new UserProfile();
+        this.userProfiles = new HashSet<>();
     }
 
     public AppUser(String username, String password, String firstName, String lastName, String email) {

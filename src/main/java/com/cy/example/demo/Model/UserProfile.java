@@ -1,9 +1,7 @@
 package com.cy.example.demo.Model;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class UserProfile {
@@ -18,15 +16,23 @@ public class UserProfile {
 
 
     @ManyToMany
-    private Set<AppUser> appusers;
+    private List<AppUser> appusers;
+
+    public UserProfile(String topic, String category, List<AppUser> appusers) {
+        this.topic = topic;
+        this.category = category;
+        this.appusers = appusers;
+    }
 
 
     public void addAppUser(AppUser appUser){
 
         appusers.add(appUser);
-
     }
 
+    public UserProfile(){
+        appusers = new ArrayList<>();
+    }
 
     public long getId() {
         return id;
@@ -52,11 +58,11 @@ public class UserProfile {
         this.category = category;
     }
 
-    public Set<AppUser> getAppusers() {
+    public List<AppUser> getAppusers() {
         return appusers;
     }
 
-    public void setAppusers(Set<AppUser> appusers) {
+    public void setAppusers(List<AppUser> appusers) {
         this.appusers = appusers;
     }
 }

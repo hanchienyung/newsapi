@@ -48,8 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
 
                 .authorizeRequests()
-                .antMatchers("/","/h2-console/**","/images/**","/register","/mainpage", "/top", "/assets/**","/css/**","/testapi","searchtopic").permitAll()
-                .antMatchers( "/entertainment", "/business", "/sports").access("hasAuthority('USER') or  hasAuthority('ADMIN')")
+                .antMatchers("/","/h2-console/**","/images/**","/register","/mainpage", "/top", "/assets/**","/css/**","/testapi").permitAll()
+                .antMatchers( "/entertainment", "/business", "/sports", "/searchtopic").access("hasAuthority('USER') or  hasAuthority('ADMIN')")
                 .antMatchers("/listfounditemadm", "/listlostitemadm", "/processupdstatus/**","addusertoreport","savdusertoreport").access("hasAuthority('ADMIN')")
 
                 .anyRequest().authenticated()

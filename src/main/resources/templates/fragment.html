@@ -30,11 +30,14 @@
                 <a class="nav-link " href="/top">Top New Stories</a>
             </li>
 
-            <li class="nav-item" sec:authorize="hasAuthority('USER') or hasAuthority('ADMIN')">
+          <!--  <li class="nav-item" sec:authorize="hasAuthority('USER') or hasAuthority('ADMIN')"> -->
             <li class="nav-item" >
                 <a class="nav-link " href="/listcategory">List Category in Profile</a>
             </li>
 
+            <li class="nav-item" sec:authorize="hasAuthority('USER') or hasAuthority('ADMIN')">
+                <a class="nav-link " href="/searchtopic">Add Topic</a>
+            </li>
 
             <li class="nav-item" sec:authorize="hasAuthority('USER') or hasAuthority('ADMIN')">
                 <a class="nav-link " href="/business">Business</a>

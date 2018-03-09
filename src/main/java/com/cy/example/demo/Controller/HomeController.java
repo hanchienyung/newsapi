@@ -13,7 +13,10 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -157,10 +160,75 @@ public class HomeController {
         return "redirect:/login";
     }
 
+    @RequestMapping("/searchtopic")
+    public String searchtopic(Model model) {
 
+        model.addAttribute("userProfile", new UserProfile());
+
+        return "topicform";
+    }
+
+    @PostMapping("/searchtopic")
+    public String searchtopic(HttpServletRequest request, @ModelAttribute("userProfile") UserProfile userProfile,BindingResult result,Model model, Authentication auth) {
+
+
+        String username = auth.getName();
+        //System.out.println("username is " + username);
+        AppUser appuser = appUserRepository.findAppUserByUsername(username);
+        //System.out.println("before add user");
+        userProfile.addAppUser(appuser);
+        //System.out.println("after add user");
+        userProfileRepository.save(userProfile);
+
+        return "listprofile";
+    }
+
+    @RequestMapping("/listprofile")
+    public String showprofile(Model model, Authentication auth){
+
+        String username = auth.getName();
+        AppUser appuser = appUserRepository.findAppUserByUsername(username);
+
+
+        model.addAttribute("profiles", userProfileRepository.findByAppusersIn(appuser));
+        return "listprofile";
+    }
+
+    @RequestMapping("/updcategory")
+    public String updcategory(Model model) {
+
+        model.addAttribute("category", new Category());
+
+        return "catgform";
+    }
+
+    @PostMapping("/addcategory")
+    public String addcategory(HttpServletRequest request, @ModelAttribute("category") Category category,BindingResult result,Model model, Authentication auth) {
+
+
+        String username = auth.getName();
+        //System.out.println("username is " + username);
+        AppUser appuser = appUserRepository.findAppUserByUsername(username);
+        //System.out.println("before add user");
+        category.addAppUser(appuser);
+        //System.out.println("after add user");
+        categoryRepository.save(category);
+
+        return "listprofile";
+    }
+
+/*
     @RequestMapping("/addtopic")
-    public String addtopic(HttpServletRequest request, @ModelAttribute("userProfile") UserProfile userProfile,BindingResult result,Model model)
+    //public String addtopic(HttpServletRequest request, @ModelAttribute("userProfile") UserProfile userProfile,BindingResult result,Model model)
+    public String addtopic(Model model)
     {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://newsapi.org/v2/everything?apiKey=f4fbdc20b9334e948008b6056897a516";
+        News news =restTemplate.getForObject(url, News.class);
+
+        ArrayList<Article> articles = news.getArticles();
+        //Set<String> categories = new HashSet<>();
+
         return "topicform";
     }
 
@@ -175,15 +243,15 @@ public class HomeController {
         /*  UserProfile userProfile = userProfileRepository.findUserProfileByUser(appuser);
         userProfile.setTopic(searchstr);
         userProfileRepository.save(userProfile);
-        */
-        HashSet <UserProfile> userProfile = userProfileRepository.findByAppusersIn(appuser);
+
+        List<UserProfile> userProfile = userProfileRepository.findByAppusersIn(appuser);
 
         for (UserProfile up: userProfile) {
             up.setTopic(searchstr);
             userProfileRepository.save(up);
         }
 
-
+*/
 
 
       //  RestTemplate restTemplate = new RestTemplate();
@@ -193,7 +261,7 @@ public class HomeController {
         //return news.getArticles().get(0).getTitle();
 
      //   model.addAttribute("articles",news.getArticles());
-        return "mainpage";
+      //  return "mainpage";
 
 
      /*   https://newsapi.org/v2/everything?q=bitcoin&apiKey=f4fbdc20b9334e948008b6056897a516
@@ -205,6 +273,6 @@ public class HomeController {
         model.addAttribute("reportlist",reportitemRepository.findAll());
         return "redirect:/";
         */
-    }
+
 
 }
