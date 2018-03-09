@@ -48,9 +48,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
 
                 .authorizeRequests()
-                .antMatchers("/","/h2-console/**","/images/**","/register","/mainpage", "/listlostitem", "/displayclothes", "/displaypets", "/displayother", "/assets/**","/css/**","/testapi").permitAll()
-                .antMatchers( "/listfounditem", "/addreportitem", "/searchitem").access("hasAuthority('USER') or  hasAuthority('ADMIN')")
-                .antMatchers("/listfounditemadm", "/listlostitemadm", "/addlostitem", "/addreportitemadm", "/processupdstatus/**","addusertoreport","savdusertoreport").access("hasAuthority('ADMIN')")
+                .antMatchers("/","/h2-console/**","/images/**","/register","/mainpage", "/top", "/assets/**","/css/**","/testapi","searchtopic").permitAll()
+                .antMatchers( "/entertainment", "/business", "/sports").access("hasAuthority('USER') or  hasAuthority('ADMIN')")
+                .antMatchers("/listfounditemadm", "/listlostitemadm", "/processupdstatus/**","addusertoreport","savdusertoreport").access("hasAuthority('ADMIN')")
 
                 .anyRequest().authenticated()
                 .and()
@@ -73,10 +73,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception{
+
         PasswordEncoder pE = passwordEncoder();
         auth.inMemoryAuthentication().withUser("username").password(pE.encode("password")).authorities("USER")
                 .and().withUser("admin").password(pE.encode("password")).authorities("ADMIN");
-
+      // auth.inMemoryAuthentication()
+      //          .withUser("admin").password("password").authorities("ADMIN")
+      //          .and().withUser("user").password("password").authorities("USER");
 
 //        Database Authentication must come after in memory authentication
         auth

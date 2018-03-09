@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!--<html lang="en" xmlns:th="www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> -->
+<html lang="en" xmlns:th="www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8"/>
     <title>My Day Name</title>
@@ -25,16 +26,27 @@
                 <a class="nav-link" href="/">Main Page</a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link " href="/top">Top New Stories</a>
+            </li>
+
             <li class="nav-item" sec:authorize="hasAuthority('USER') or hasAuthority('ADMIN')">
+            <li class="nav-item" >
                 <a class="nav-link " href="/listcategory">List Category in Profile</a>
             </li>
 
+
             <li class="nav-item" sec:authorize="hasAuthority('USER') or hasAuthority('ADMIN')">
-                <a class="nav-link " href="/updcategory">Add category to Profile</a>
+                <a class="nav-link " href="/business">Business</a>
+            </li>
+
+
+            <li class="nav-item" sec:authorize="hasAuthority('USER') or hasAuthority('ADMIN')">
+                <a class="nav-link " href="/entertainment">Entertainment</a>
             </li>
 
             <li class="nav-item" sec:authorize="hasAuthority('USER') or hasAnyAuthority('ADMIN')">
-                <a class="nav-link " href="/delcategory">Delete Category from Profile</a>
+                <a class="nav-link " href="/sports">Sports</a>
             </li>
 
 
@@ -49,16 +61,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/logout">Logout</a>
             </li>
-
-
         </ul>
     </nav>
 </div>
-
-
-
-
-
 <span th:fragment="bootstrap4js">
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

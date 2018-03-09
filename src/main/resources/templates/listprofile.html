@@ -9,18 +9,18 @@
     <link rel="stylesheet" href="./css/styles.css"/>
 </head>
 <div th:replace="fragment :: navlinks"></div>
-<h1>List of News</h1>
+<h1>List of Profiles</h1>
 <table class="table" >
     <tr>
-        <th>Name</th>
-        <th>Title</th>
-        <th>Description</th>
+        <th>Username</th>
+        <th>Topic</th>
+        <th>Category</th>
 
     </tr>
-    <tr th:each="article : ${articles}">
-        <td data-th="Author" th:text="${article.author}"></td>
-        <td data-th="Title" th:text="${article.title}"></td>
-        <td data-th="Description" th:text="${article.description}"></td>
+    <tr th:each="profile : ${profiles}">
+        <td data-th="Username" th:text="${profile.author}"></td>
+        <td data-th="Topic" th:text="${profile.title}"></td>
+        <td data-th="Category" th:text="${article.description}"></td>
 
     </tr>
 </table>

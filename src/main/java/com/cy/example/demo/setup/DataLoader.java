@@ -60,7 +60,7 @@ public class DataLoader implements CommandLineRunner {
 
 
         //Add User Profiles
-      /*  UserProfile profile1 = new UserProfile("profile1", user1);
+       /* UserProfile profile1 = new UserProfile("profile1", user1);
         userProfileRepository.save(profile1);
         user1.addProfile(profile1);
 

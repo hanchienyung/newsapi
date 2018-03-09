@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Search Item</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css?family=Caveat Brush" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/styles.css"/>
+</head>
+<body>
+<div th:replace="fragment :: navlinks"></div>
+<div class="body-content">
+    <div class="col-sm">
+        <form action="#"
+              th:action="@{/searchtopic}"
+              method="post">
+
+            Search by topic: <br />
+            <input type="text" name="searchstr"/>
+            <input type="submit" value="submit"/>
+<!--
+<form th:action="@{/searchtopic}" th:object="${userprofile}" method="post">
+    <select th:field="*{category}" name ="cats">
+        <option th:each="ca:${cat}" th:value="${ca.BUSINESS}" th:text="${ca.BUSINESS}" th:selected="*{category}"></option>
+        <option th:each="ca:${cat}" th:value="${ca.ENTERTAINMENT}" th:text="${ca.ENTERTAINMENT}" th:selected="*{category}"></option>
+        <option th:each="ca:${cat}" th:value="${ca.GENERAL}" th:text="${ca.GENERAL}" th:selected="*{category}"></option>
+        <option th:each="ca:${cat}" th:value="${ca.HEALTH}" th:text="${ca.HEALTH}" th:selected="*{category}"></option>
+        <option th:each="ca:${cat}" th:value="${ca.SCIENCE}" th:text="${ca.SCIENCE}" th:selected="*{category}"></option>
+        <option th:each="ca:${cat}" th:value="${ca.SPORT}" th:text="${ca.SPORT}" th:selected="*{category}"></option>
+        <option th:each="ca:${cat}" th:value="${ca.TECHNOLOGY}" th:text="${ca.TECHNOLOGY}" th:selected="*{category}"></option>
+    </select>
+    <input type="submit" value="submit"/>
+</form>-->
+</body>
+</html>

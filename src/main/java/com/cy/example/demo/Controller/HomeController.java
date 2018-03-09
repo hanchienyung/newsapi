@@ -2,6 +2,7 @@ package com.cy.example.demo.Controller;
 
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import com.cy.example.demo.Model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.HashSet;
 
 
 @Controller
@@ -30,12 +32,18 @@ public class HomeController {
     @Autowired
     UserProfileRepository userProfileRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    @RequestMapping("/")
+    public String mainpage(Model model){
+        return "mainpage";
+    }
 
-    @RequestMapping("/entertainment")
-    public String showindexent(Model model){
+    @RequestMapping("/top")
+    public String showindex(Model model){
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://newsapi.org/v2/top-headlines?sources=entertainment-weekly&apiKey=f4fbdc20b9334e948008b6056897a516";
+        String url = "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=f4fbdc20b9334e948008b6056897a516";
 
         News news =restTemplate.getForObject(url, News.class);
 
@@ -47,18 +55,55 @@ public class HomeController {
         return "listnews";
     }
 
-    @RequestMapping("/")
-    public String showindex(Model model){
+    @RequestMapping("/entertainment")
+    public String showindexent(Model model){
         RestTemplate restTemplate = new RestTemplate();
-        String url = "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=f4fbdc20b9334e948008b6056897a516";
+        String url = "https://newsapi.org/v2/top-headlines?sources=entertainment-weekly&apiKey=f4fbdc20b9334e948008b6056897a516";
 
-       News news =restTemplate.getForObject(url, News.class);
+        News news =restTemplate.getForObject(url, News.class);
 
         //return news.getArticles().get(0).getTitle();
 
-       model.addAttribute("articles",news.getArticles());
-       System.out.println("before calling listnews ");
+        model.addAttribute("articles",news.getArticles());
+        return "listnews";
+    }
 
+    @RequestMapping("/business")
+    public String showindexbus(Model model){
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://newsapi.org/v2/top-headlines?sources=business-insider&apiKey=f4fbdc20b9334e948008b6056897a516";
+
+        News news =restTemplate.getForObject(url, News.class);
+
+        //return news.getArticles().get(0).getTitle();
+
+        model.addAttribute("articles",news.getArticles());
+        return "listnews";
+    }
+
+    @RequestMapping("/sports")
+    public String showindexspo(Model model){
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://newsapi.org/v2/top-headlines?sources=bbc-sport&apiKey=f4fbdc20b9334e948008b6056897a516";
+
+        News news =restTemplate.getForObject(url, News.class);
+
+        //return news.getArticles().get(0).getTitle();
+
+        model.addAttribute("articles",news.getArticles());
+        return "listnews";
+    }
+
+    @RequestMapping("/everything")
+    public String showall(Model model){
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://newsapi.org/v2/everything?q=bitcoin&apiKey=f4fbdc20b9334e948008b6056897a516";
+
+        News news =restTemplate.getForObject(url, News.class);
+
+        //return news.getArticles().get(0).getTitle();
+
+        model.addAttribute("articles",news.getArticles());
         return "listnews";
     }
 
@@ -72,15 +117,6 @@ public class HomeController {
         return news.getArticles().get(10).getTitle();
     }
 
-
-
-
-   /* @RequestMapping("/")
-    public String mainpage(Model model)
-    {
-        return "mainpage";
-    }
-*/
 
     @RequestMapping("/login")
     public String login(Model model)
@@ -104,6 +140,8 @@ public class HomeController {
     @PostMapping("/register")
     public String saveUser(@Valid @ModelAttribute("user") AppUser user, BindingResult result, HttpServletRequest request)
     {
+        String thePassword = user.getPassword();
+
         if(result.hasErrors())
         {
             return "registration";
@@ -114,38 +152,51 @@ public class HomeController {
         else
             user.addRole(appRoleRepository.findAppRoleByRoleName("USER"));
 
+        user.setPassword(passwordEncoder.encode(thePassword));
         appUserRepository.save(user);
         return "redirect:/login";
     }
 
-  /*  @RequestMapping("/listnews")
-    public String listnews(Model model, Authentication auth)
-    {
-        AppUser user = appUserRepository.findAppUserByUsername(auth.getName());
-        model.addAttribute("newss", newsRepository.findNewsByC(user));
-        return "listnews";
-    }
-/*
-    @RequestMapping("/addcategory")
-    public String addcategory(Model model)
-    {
-        ReportItem reportItem  = new ReportItem();
-        reportitemRepository.save(reportItem);
 
-        model.addAttribute("reportitem", reportItem);
-        model.addAttribute("users",userRepository.findAll());
-
-        return "addcategory";
+    @RequestMapping("/searchtopic")
+    public String searchtopic(HttpServletRequest request, @ModelAttribute("userProfile") UserProfile userProfile,BindingResult result,Model model)
+    {
+        return "searchform";
     }
 
-    @PostMapping("/addcategory")
-    public String addreportitemadm(HttpServletRequest request,@Valid @ModelAttribute("reportitem") ReportItem reportItem, Authentication auth, BindingResult result, Model model)
+    @PostMapping("/searchtopic")
+    public String searchtopic(HttpServletRequest request, Model model, Authentication auth)
     {
-        if(result.hasErrors())
-        {
-            return "addreportitemadm";
+        String searchstr = request.getParameter("searchstr");
+        String username = auth.getName();
+        AppUser appuser = appUserRepository.findAppUserByUsername(username);
+
+        //model.addAttribute("appuser", appuser);
+        /*  UserProfile userProfile = userProfileRepository.findUserProfileByUser(appuser);
+        userProfile.setTopic(searchstr);
+        userProfileRepository.save(userProfile);
+        */
+        HashSet <UserProfile> userProfile = userProfileRepository.findUserProfileByUsers(appuser);
+
+        for (UserProfile up: userProfile) {
+            up.setTopic(searchstr);
+            userProfileRepository.save(up);
         }
 
+
+
+
+      //  RestTemplate restTemplate = new RestTemplate();
+     //   String url = "https://newsapi.org/v2/everything?apiKey=f4fbdc20b9334e948008b6056897a516&q=" + searchstr;
+      //  News news =restTemplate.getForObject(url, News.class);
+
+        //return news.getArticles().get(0).getTitle();
+
+     //   model.addAttribute("articles",news.getArticles());
+        return "listprofile";
+
+
+     /*   https://newsapi.org/v2/everything?q=bitcoin&apiKey=f4fbdc20b9334e948008b6056897a516
         String userid = request.getParameter("userid");
         AppUser appuser = userRepository.findOne(new Long(userid));
         reportItem.addUsertoReport(appuser);
@@ -153,6 +204,7 @@ public class HomeController {
         reportitemRepository.save(reportItem);
         model.addAttribute("reportlist",reportitemRepository.findAll());
         return "redirect:/";
+        */
     }
-*/
+
 }

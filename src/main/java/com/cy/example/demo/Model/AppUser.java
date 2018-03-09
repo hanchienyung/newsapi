@@ -41,8 +41,8 @@ public class AppUser {
     private Set<AppRole> roles;
 
 
-    //@OneToOne(mappedBy = "user")
-    //private UserProfile userProfile;
+   // @OneToOne(mappedBy = "user")
+   // private UserProfile userProfile;
 
     public AppUser() {
         this.roles = new HashSet<>();
@@ -63,9 +63,9 @@ public class AppUser {
     public void addRole(AppRole role) { this.roles.add(role);}
 
 
-    /*public void addProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
-    }*/
+   // public void addProfile(UserProfile userProfile) {
+   //     this.userProfile = userProfile;
+   // }
 
 
     public long getId() {

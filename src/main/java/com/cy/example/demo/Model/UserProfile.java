@@ -8,67 +8,77 @@ import java.util.Set;
 @Entity
 public class UserProfile {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
-        private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-        @Column(unique=true)
-        private String profileName;
+    private String topic;
 
-
-        @OneToOne //(mappedBy = "userProfile",fetch = FetchType.LAZY)
-        private AppUser user;
-
-        @ManyToMany
-        private Set<Category> profileCategories;
+    //private String category;
 
 
-        public UserProfile() {
-           this.user = new AppUser();
-           this.profileCategories = new HashSet<>();
-        }
+    @ManyToMany //(mappedBy = "userprofiles")
+    private Set<AppUser> users;
 
-        public UserProfile(String profileName, AppUser user) {
-           this.profileName = profileName;
-           this.user = user;
-           this.profileCategories = new HashSet<>();
-       }
+   // @OneToOne
+   // private AppUser user;
 
-       public  void addCategorytoProfile(Category acategory) {
+
+    //@ManyToMany //(mappedBy = "categories")
+    //private Set<Category> profileCategories;
+
+
+    public UserProfile() {
+        this.users = new HashSet<>();
+       // this.user = new AppUser();
+        //this.profileCategories = new HashSet<>();
+    }
+
+    public UserProfile(String topic) { //}, AppUser appuser) {
+        this.topic = topic;
+        this.users = new HashSet<>();
+       // this.user = user;
+
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+  /*  public AppUser getUser() {
+        return user;
+    }
+
+    public void setUser(AppUser user) {
+        this.user = user;
+    }
+    */
+
+
+    public Set<AppUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<AppUser> users) {
+        this.users = users;
+    }
+
+
+      /* public  void addCategorytoProfile(Category acategory) {
             this.profileCategories.add(acategory);
 
-       }
+       }*/
 
-
-        public long getId() {
-            return id;
-        }
-
-        public void setId(long id) {
-            this.id = id;
-        }
-
-        public String getProfileName() {
-            return profileName;
-        }
-
-        public void setProfileName(String profileName) {
-            this.profileName = profileName;
-        }
-
-        public AppUser getUser() {
-            return user;
-        }
-
-        public void setUser(AppUser user) {
-            this.user = user;
-        }
-
-        public Set<Category> getProfileCategories() {
-            return profileCategories;
-        }
-
-        public void setProfileCategories(Set<Category> profileCategories) {
-            this.profileCategories = profileCategories;
-        }
-    }
+}
