@@ -41,8 +41,8 @@ public class AppUser {
     private Set<AppRole> roles;
 
 
-   // @OneToOne(mappedBy = "user")
-   // private UserProfile userProfile;
+    @ManyToMany(mappedBy = "appusers")
+    private Set <UserProfile>  userProfiles;
 
     public AppUser() {
         this.roles = new HashSet<>();
@@ -56,17 +56,11 @@ public class AppUser {
         this.lastName = lastName;
         this.email = email;
         this.roles = new HashSet<>();
-     //   this.userProfile = new HashSet<>();
+        this.userProfiles = new HashSet<>();
     }
 
 
     public void addRole(AppRole role) { this.roles.add(role);}
-
-
-   // public void addProfile(UserProfile userProfile) {
-   //     this.userProfile = userProfile;
-   // }
-
 
     public long getId() {
         return id;
@@ -124,12 +118,20 @@ public class AppUser {
         this.roles = roles;
     }
 
-    /*public UserProfile getUserProfile() {
-        return userProfile;
+    public Set<UserProfile> getUserProfiles() {
+        return userProfiles;
     }
 
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
-    }*/
+    public void setUserProfiles(Set<UserProfile> userProfiles) {
+        this.userProfiles = userProfiles;
+    }
+
+
+    // public void addProfile(UserProfile userProfile) {
+   //     this.userProfile = userProfile;
+   // }
+
+
+
 }
 

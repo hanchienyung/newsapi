@@ -158,16 +158,16 @@ public class HomeController {
     }
 
 
-    @RequestMapping("/searchtopic")
-    public String searchtopic(HttpServletRequest request, @ModelAttribute("userProfile") UserProfile userProfile,BindingResult result,Model model)
+    @RequestMapping("/addtopic")
+    public String addtopic(HttpServletRequest request, @ModelAttribute("userProfile") UserProfile userProfile,BindingResult result,Model model)
     {
-        return "searchform";
+        return "topicform";
     }
 
-    @PostMapping("/searchtopic")
-    public String searchtopic(HttpServletRequest request, Model model, Authentication auth)
+    @PostMapping("/addtopic")
+    public String addtopic(HttpServletRequest request, Model model, Authentication auth)
     {
-        String searchstr = request.getParameter("searchstr");
+        String searchstr = request.getParameter("topic");
         String username = auth.getName();
         AppUser appuser = appUserRepository.findAppUserByUsername(username);
 
@@ -176,7 +176,7 @@ public class HomeController {
         userProfile.setTopic(searchstr);
         userProfileRepository.save(userProfile);
         */
-        HashSet <UserProfile> userProfile = userProfileRepository.findUserProfileByUsers(appuser);
+        HashSet <UserProfile> userProfile = userProfileRepository.findByAppusersIn(appuser);
 
         for (UserProfile up: userProfile) {
             up.setTopic(searchstr);
@@ -193,7 +193,7 @@ public class HomeController {
         //return news.getArticles().get(0).getTitle();
 
      //   model.addAttribute("articles",news.getArticles());
-        return "listprofile";
+        return "mainpage";
 
 
      /*   https://newsapi.org/v2/everything?q=bitcoin&apiKey=f4fbdc20b9334e948008b6056897a516

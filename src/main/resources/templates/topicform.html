@@ -12,11 +12,14 @@
 <div class="body-content">
     <div class="col-sm">
         <form action="#"
-              th:action="@{/searchtopic}"
-              method="post">
+              th:action="@{/addtopic}"
+              method="post"
+              th:object="${userProfile}">
 
+            <input type="hidden" th:field="*{id}">
             Search by topic: <br />
-            <input type="text" name="searchstr"/>
+
+            <input type="text" th:field="*{topic}">  <!--<name="searchstr"/> -->
             <input type="submit" value="submit"/>
 <!--
 <form th:action="@{/searchtopic}" th:object="${userprofile}" method="post">

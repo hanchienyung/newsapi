@@ -14,32 +14,19 @@ public class UserProfile {
 
     private String topic;
 
-    //private String category;
+    private String category;
 
 
-    @ManyToMany //(mappedBy = "userprofiles")
-    private Set<AppUser> users;
-
-   // @OneToOne
-   // private AppUser user;
+    @ManyToMany
+    private Set<AppUser> appusers;
 
 
-    //@ManyToMany //(mappedBy = "categories")
-    //private Set<Category> profileCategories;
+    public void addAppUser(AppUser appUser){
 
-
-    public UserProfile() {
-        this.users = new HashSet<>();
-       // this.user = new AppUser();
-        //this.profileCategories = new HashSet<>();
-    }
-
-    public UserProfile(String topic) { //}, AppUser appuser) {
-        this.topic = topic;
-        this.users = new HashSet<>();
-       // this.user = user;
+        appusers.add(appUser);
 
     }
+
 
     public long getId() {
         return id;
@@ -57,28 +44,19 @@ public class UserProfile {
         this.topic = topic;
     }
 
-  /*  public AppUser getUser() {
-        return user;
+    public String getCategory() {
+        return category;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
-    }
-    */
-
-
-    public Set<AppUser> getUsers() {
-        return users;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public void setUsers(Set<AppUser> users) {
-        this.users = users;
+    public Set<AppUser> getAppusers() {
+        return appusers;
     }
 
-
-      /* public  void addCategorytoProfile(Category acategory) {
-            this.profileCategories.add(acategory);
-
-       }*/
-
+    public void setAppusers(Set<AppUser> appusers) {
+        this.appusers = appusers;
+    }
 }
